@@ -1,0 +1,15 @@
+.nav-link {
+    text-decoration: none;
+    color: rgba(0,0,0,.6);
+}
+
+.nav-link.active {
+    text-decoration: none;
+    color: rgba(0,0,0,.9);
+    font-weight: bold;
+}
+
+.nav-link:hover {
+    text-decoration: none;
+    color: rgba(0,0,0,.9);
+}
