@@ -5,7 +5,9 @@ export class SessionService {
     keyConnexion = 'keyConnexion';
 
     init() {
+        // Clear session
         sessionStorage.clear();
+        // Initi new object session
         this.setConnexion(new ConnexionHelper());
     }
 
@@ -39,6 +41,15 @@ export class SessionService {
         var connexion = this.getConnexion();
         connexion.user = user;
         this.setConnexion(connexion);
+    }
+
+    isUserConnected() {
+        const user = this.getConnexion().user;
+
+        if (user === undefined || user === null || user.id === 0)
+            return false;
+        else
+            return true;
     }
 
 }

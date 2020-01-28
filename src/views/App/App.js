@@ -32,17 +32,6 @@ class App extends Component {
     alert('The user connected is : ' + user.toString());
   }
 
-  componentDidMount() {
-    // Load setting of appication
-    this.props.appSettingService.getAppSettings()
-                                .then(
-                                  (data) => {
-                                    // Update state
-                                    this.setState({ appSetting: data });
-                                  }
-                                );
-  }
-
   render() {
     // Get value from state
     const { user, appSetting } = this.state;
@@ -56,10 +45,10 @@ class App extends Component {
             onProfil={ this.onProfil }></HeaderComponent>
         </header>
         <Switch>
-            <Route exact path='/'        render={(props) => <AuthComponent {...props} userService={ this.props.userService } onSignin={ this.onSignInOrOut } />} />
-            <Route exact path='/auth'    render={(props) => <AuthComponent {...props} userService={ this.props.userService } onSignin={ this.onSignInOrOut } />} />
-            <Route                        render={(props) => <AuthComponent {...props} userService={ this.props.userService } onSignin={ this.onSignInOrOut } />} />
-            <Route path='/datas'   render={(props) => <DataComponent {...props} />} />
+            <Route exact path='/'        render={(props) => <AuthComponent {...props} onSignin={ this.onSignInOrOut } />} />
+            <Route exact path='/auth'    render={(props) => <AuthComponent {...props} onSignin={ this.onSignInOrOut } />} />
+            <Route       path='/datas'   render={(props) => <DataComponent {...props}                                 />} />
+            <Route                       render={(props) => <AuthComponent {...props} onSignin={ this.onSignInOrOut } />} />
         </Switch>
         <footer>
           <FooterComponent version={ appSetting.version }></FooterComponent>

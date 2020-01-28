@@ -4,10 +4,18 @@ export class DataModel {
     type;
     value;
 
-    constructor() {
+    constructor(type = '', value = '') {
         this.id = 0;
-        this.type = null;
-        this.value = null;
+        this.type = type;
+        this.value = value;
+    }
+
+    toString() {
+        return JSON.stringify(this);
+    }
+
+    static cast(obj) {
+        return new DataModel(obj.type, obj.value);
     }
 
 }

@@ -3,6 +3,7 @@ import './AuthComponent.css';
 import { UserModel } from '../../models/UserModel';
 import * as Utils from '../../helpers/Utils';
 import { Redirect } from 'react-router-dom';
+import { SESSION_SERVICE, USER_SERVICE }  from '../../module';
 
 class AuthComponent extends Component {
 
@@ -13,8 +14,13 @@ class AuthComponent extends Component {
     }
 
     componentDidMount() {
+        console.warn('AuthComponent: ' + new Date().getTime());
         // Send to master component
         this.props.onSignin(
+            this.state.user
+        );
+        // Set in session
+        SESSION_SERVICE.setUser(
             this.state.user
         );
     }
@@ -27,33 +33,34 @@ class AuthComponent extends Component {
         // Set loading mode
         this.setState({ isLoading: true });
         // Process to verify credential of user
-        this.props.userService
-                  .authentication(user)
-                  .then(
-                      (data) => {
-                        // Send to master component
-                        this.props.onSignin(data);
-                        // success
-                        return true;
-                      },
-                      (error) => {
-                        // Notification
-                        Utils.notificationError(error);
-                        // Fail
-                        return false;
-                      }
-                  )
-                  .then(
-                      (isSuccess) => {
-                        // Set loading mode
-                        this.setState({ isLoading: false });
-                        // Reset form
-                        this.setState({ user: new UserModel() });
-                        // If success redirect
-                        if (isSuccess)
-                            this.setState({ isRedirected: true });
-                      }
-                  );
+        USER_SERVICE.authentication(user)
+                    .then(
+                        (data) => {
+                            // Send to master component
+                            this.props.onSignin(data);
+                            // Set in session
+                            SESSION_SERVICE.setUser(data);
+                            // success
+                            return true;
+                        },
+                        (error) => {
+                            // Notification
+                            Utils.notificationError(error);
+                            // Fail
+                            return false;
+                        }
+                    )
+                    .then(
+                        (isSuccess) => {
+                            // Set loading mode
+                            this.setState({ isLoading: false });
+                            // Reset form
+                            this.setState({ user: new UserModel() });
+                            // If success redirect
+                            if (isSuccess)
+                                this.setState({ isRedirected: true });
+                        }
+                    );
     }
 
     isOnLoadingButton = () => {
@@ -84,7 +91,7 @@ class AuthComponent extends Component {
     render() {
         // Rediction à la route
         if (this.state.isRedirected)
-            return <Redirect to={ '/datas' }></Redirect>
+            return <Redirect to='/datas'></Redirect>
 
         return (
             <Fragment>

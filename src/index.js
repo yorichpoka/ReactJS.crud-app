@@ -7,17 +7,25 @@ import 'devextreme/dist/css/dx.light.css';
 import './index.css';
 import App from './views/App/App';
 import * as serviceWorker from './serviceWorker';
-import { rootHtmlElement, dataService, appSettingService, sessionService, userService }  from './module';
+import { ROOT_HTMLELEMENT, APPSETTING_SERVICE, SESSION_SERVICE }  from './module';
 
 
-ReactDOM.render(
-    <App 
-        dataService={ dataService } 
-        appSettingService={ appSettingService }
-        sessionService={ sessionService }
-        userService={ userService } />, 
-    rootHtmlElement
-);
+// Clear session
+SESSION_SERVICE.init();
+// Load setting of appication
+APPSETTING_SERVICE.getAppSettings()
+                    .then(
+                        (data) => {
+                            // Update in session
+                            SESSION_SERVICE.setAppSetting(data);
+                            // Load application
+                            ReactDOM.render(
+                                <App />, 
+                                ROOT_HTMLELEMENT
+                            );
+                        }
+                    );
+
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

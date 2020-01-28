@@ -5,8 +5,8 @@ export class UserModel {
     password;
     username;
 
-    constructor(login = '', password = '', username = '') {
-        this.id = 0;
+    constructor(login = '', password = '', username = '', id = 0) {
+        this.id = id;
         this.login = login;
         this.password = password;
         this.username = username;

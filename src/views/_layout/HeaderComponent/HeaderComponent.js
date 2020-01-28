@@ -4,8 +4,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import Image from 'react-bootstrap/Image';
-// import { UserModel } from '../../../models/UserModel';
-import { Redirect } from 'react-router-dom';
+import { Redirect, NavLink } from 'react-router-dom';
 
 
 class HeaderComponent extends Component {
@@ -17,7 +16,7 @@ class HeaderComponent extends Component {
     render() {
         // Rediction à la route
         if (this.state.isRedirected)
-            return <Redirect path={ '/auth' }></Redirect>
+            return <Redirect to='/auth'></Redirect>
 
         return (
             <div className="container">
@@ -27,19 +26,23 @@ class HeaderComponent extends Component {
                     </Navbar.Brand>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
-                        <Nav.Link href="#auth" active="true">
+                        <Nav.Link href="/auth" active="true">
                             <i className="fa fa-users"></i> Users
                         </Nav.Link>
-                        <Nav.Link href="#datas">
+                        <Nav.Link href="/datas">
                             <i className="fa fa-square"></i> Datas
                         </Nav.Link>
+                        <NavLink to="/auth">
+                            About
+                        </NavLink>
                         <Nav className="ml-auto">
                             <NavDropdown title={ this.props.user.username } id="basic-nav-dropdown">
                                 <NavDropdown.Item onClick={ this.props.onProfil }>
                                     <i className="fa fa-info-circle"></i> Profil
                                 </NavDropdown.Item>
                                 <NavDropdown.Divider />
-                                <NavDropdown.Item onClick={ () => this.setState({ isRedirected: true }) }>
+                                <NavDropdown.Item 
+                                    onClick={ () => this.setState({ isRedirected: true }) }>
                                     <i className="fa fa-sign-out"></i> Sing out
                                 </NavDropdown.Item>
                             </NavDropdown>

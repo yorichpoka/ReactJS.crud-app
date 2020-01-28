@@ -4,17 +4,17 @@ import { DataService } from './services/DataService';
 import { SessionService } from './services/SessionService';
 import { UsersService } from './services/UserService';
 
-const rootHtmlElement = document.getElementById('root');
-const dataService = new DataService();
-const appSettingService = new AppsettingsService();
-const sessionService = new SessionService();
-const userService = new UsersService();
+const ROOT_HTMLELEMENT = document.getElementById('root');
+const DATA_SERVICE = new DataService();
+const APPSETTING_SERVICE = new AppsettingsService();
+const SESSION_SERVICE = new SessionService();
+const USER_SERVICE = new UsersService();
 
 
 export { 
-    rootHtmlElement, 
-    dataService, 
-    appSettingService, 
-    sessionService,
-    userService
+    ROOT_HTMLELEMENT, 
+    DATA_SERVICE, 
+    APPSETTING_SERVICE, 
+    SESSION_SERVICE,
+    USER_SERVICE
 };
