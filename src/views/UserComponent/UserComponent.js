@@ -5,7 +5,9 @@ import { UserModel } from '../../models/UserModel';
 
 class UserComponent extends Component {
 
-    state = { }
+    state = {
+        idSelectedRowsData: []
+    }
 
     dataSource = [
         new UserModel('admin', 'admin', 'Ulrich POKA', new Date().getTime()),
@@ -13,8 +15,9 @@ class UserComponent extends Component {
         new UserModel('admin', 'admin', 'User N°2', new Date().getTime())
     ];
 
-    onSelectionChanged = (event) => {
-
+    onSelectionChanged = ({ selectedRowsData }) => {
+        // Get array of id selected in state
+        this.setState({ idSelectedRowsData: selectedRowsData.map(l => l.id ) });
     }
 
     onToolbarPreparing = (event) => {
@@ -28,8 +31,8 @@ class UserComponent extends Component {
                     <div className="float-left">
                         <i className="fa fa-list"></i> Users list
                     </div>
-                    <button className="btn btn-sm btn-secondary float-right">
-                        <i className="fa fa-trash"></i> Delete selection ({ '0' })
+                    <button className="btn btn-sm btn-secondary float-right" disabled={ this.state.idSelectedRowsData.length === 0} >
+                        <i className="fa fa-trash"></i> Delete selection ({ this.state.idSelectedRowsData.length })
                     </button>
                 </div>
                 <div className="card-body">

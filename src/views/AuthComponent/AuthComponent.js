@@ -91,7 +91,7 @@ class AuthComponent extends Component {
                 <div className="py-2 d-none d-md-block"></div>
 
                 <form className="form-signin" onSubmit={ this.onSubmit }>
-                    <div className="text-center">
+                    <div className="text-center pb-3">
                         <img className="mb-4 text-center" src="images/logo_ainos_550x137.png" alt="" height="72" />
                     </div>
 

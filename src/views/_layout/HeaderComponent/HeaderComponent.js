@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState,  } from 'react';
 import './HeaderComponent.css';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
@@ -6,9 +6,12 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import Image from 'react-bootstrap/Image';
 import { NavLink, Redirect } from 'react-router-dom';
 import { UserModel } from '../../../models/UserModel';
+import Modal from 'react-bootstrap/Modal';
 
 
 function HeaderComponent({ userConnected, onProfil, onSignout }) {
+
+    const [isActivatedUserProfil, setIsActivatedUserProfil] = useState(false);
 
     return (
         <div className="container">
@@ -30,7 +33,7 @@ function HeaderComponent({ userConnected, onProfil, onSignout }) {
                     </NavLink>
                     <Nav className="ml-auto">
                         <NavDropdown title={ userConnected.username } id="basic-nav-dropdown">
-                            <NavDropdown.Item onClick={ onProfil }>
+                            <NavDropdown.Item onClick={ () => setIsActivatedUserProfil(true) }>
                                 <i className="fa fa-info-circle"></i> Profil
                             </NavDropdown.Item>
                             <NavDropdown.Divider />
@@ -42,6 +45,27 @@ function HeaderComponent({ userConnected, onProfil, onSignout }) {
                     </Nav>
                 </Navbar.Collapse>
             </Navbar>
+            <Modal show={ isActivatedUserProfil } onHide={() => setIsActivatedUserProfil(false) }>
+                <Modal.Body>
+                    <div className="card mb-3">
+                        <div className="row no-gutters">
+                            <div className="col-md-4">
+                                <img src="..." className="card-img" alt="..." />
+                            </div>
+                            <div className="col-md-8">
+                                <div className="card-body">
+                                    <h5 className="card-title">
+                                        { userConnected.username }
+                                    </h5>
+                                    <p className="card-text">
+                                        Login : xxxxx
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </Modal.Body>
+            </Modal>
         </div>
     );
 }
