@@ -14,15 +14,10 @@ class AuthComponent extends Component {
     }
 
     componentDidMount() {
-        console.warn('AuthComponent: ' + new Date().getTime());
         // Send to master component
-        this.props.onSignin(
-            this.state.user
-        );
+        this.props.onSignin(new UserModel());
         // Set in session
-        SESSION_SERVICE.setUser(
-            this.state.user
-        );
+        SESSION_SERVICE.setUser(new UserModel());
     }
 
     onSubmit = event => {
@@ -80,10 +75,7 @@ class AuthComponent extends Component {
         const { user } = this.state;
         const inputName = event.currentTarget.name;
         // update objet
-        if (inputName === 'login')
-            user.login = event.currentTarget.value;
-        else
-            user.password = event.currentTarget.value;
+        user[inputName] = event.currentTarget.value;
         // Update state
         this.setState({ user: user });
     }
@@ -91,7 +83,7 @@ class AuthComponent extends Component {
     render() {
         // Rediction à la route
         if (this.state.isRedirected)
-            return <Redirect to='/datas'></Redirect>
+            return <Redirect to='/users'></Redirect>
 
         return (
             <Fragment>

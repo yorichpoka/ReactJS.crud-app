@@ -29,6 +29,10 @@ export class SessionService {
         );
     }
 
+    getAppSetting() {
+        return this.getConnexion().appSetting;
+    }
+
     setAppSetting(appSetting) {
         var connexion = new ConnexionHelper();
         connexion = this.getConnexion();

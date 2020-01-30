@@ -1,18 +1,17 @@
 import React, { Component } from 'react';
 import './App.css';
-import { AppSettingModel } from '../../models/AppSettingModel';
 import { UserModel } from '../../models/UserModel';
 import HeaderComponent from '../_layout/HeaderComponent/HeaderComponent';
 import FooterComponent from '../_layout/FooterComponent/FooterComponent';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import DataComponent from '../DataComponent/DataComponent';
 import AuthComponent from '../AuthComponent/AuthComponent';
+import UserComponent from '../UserComponent/UserComponent';
 
 
 class App extends Component {
 
   state = {
-    appSetting: new AppSettingModel(),
     user: new UserModel(),
   }
 
@@ -25,7 +24,7 @@ class App extends Component {
     this.setState({ user: user });
   }
 
-  onProfil = (event) => {
+  onProfil = () => {
     // Get value from state
     const { user } = this.state;
     // Alert value
@@ -34,24 +33,27 @@ class App extends Component {
 
   render() {
     // Get value from state
-    const { user, appSetting } = this.state;
+    const { user } = this.state;
 
     return (
       <BrowserRouter>
         <header className="bg-white pt-2 pb-5">
           <HeaderComponent 
-            user={ user } 
-            onSignout={ this.onSignInOrOut }
+            userConnected={ user } 
+            onSignout={ this.onSignInOrOut.bind(this) }
             onProfil={ this.onProfil }></HeaderComponent>
         </header>
-        <Switch>
-            <Route exact path='/'        render={(props) => <AuthComponent {...props} onSignin={ this.onSignInOrOut } />} />
-            <Route exact path='/auth'    render={(props) => <AuthComponent {...props} onSignin={ this.onSignInOrOut } />} />
-            <Route       path='/datas'   render={(props) => <DataComponent {...props}                                 />} />
-            <Route                       render={(props) => <AuthComponent {...props} onSignin={ this.onSignInOrOut } />} />
-        </Switch>
+        <div className="container py-5">
+          <Switch>
+              <Route exact path='/'        render={(props) => <AuthComponent {...props} onSignin={ this.onSignInOrOut.bind(this) } />} />
+              <Route exact path='/auth'    render={(props) => <AuthComponent {...props} onSignin={ this.onSignInOrOut.bind(this) } />} />
+              <Route       path='/datas'   render={(props) => <DataComponent {...props}                                            />} />
+              <Route       path='/users'   render={(props) => <UserComponent {...props}                                            />} />
+              <Route                       render={(props) => <AuthComponent {...props} onSignin={ this.onSignInOrOut.bind(this) } />} />
+          </Switch>
+        </div>
         <footer>
-          <FooterComponent version={ appSetting.version }></FooterComponent>
+          <FooterComponent />
         </footer>
       </BrowserRouter>
     );

@@ -1,15 +1,15 @@
-.nav-link {
+.app-menu-link {
     text-decoration: none;
     color: rgba(0,0,0,.6);
 }
 
-.nav-link.active {
+.app-menu-link.active {
     text-decoration: none;
     color: rgba(0,0,0,.9);
     font-weight: bold;
 }
 
-.nav-link:hover {
+.app-menu-link:hover {
     text-decoration: none;
     color: rgba(0,0,0,.9);
 }
