@@ -92,7 +92,7 @@ class AuthComponent extends Component {
 
                 <form className="form-signin" onSubmit={ this.onSubmit }>
                     <div className="text-center">
-                        <img className="mb-4 text-center" src="images/bootstrap-solid.svg" alt="" width="72" height="72" />
+                        <img className="mb-4 text-center" src="images/logo_ainos_550x137.png" alt="" height="72" />
                     </div>
 
                     <input 

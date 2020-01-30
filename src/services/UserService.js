@@ -6,7 +6,7 @@ export class UsersService {
     dataSource = [
         new UserModel('admin', 'admin', 'Ulrich POKA', new Date().getTime()),
         new UserModel('user1', 'user1', 'User N°1', new Date().getTime()),
-        new UserModel('admin', 'admin', 'User N°2', new Date().getTime())
+        new UserModel('user2', 'user2', 'User N°2', new Date().getTime())
     ];
   
     create(obj) {
@@ -49,7 +49,35 @@ export class UsersService {
     readAll() {
         return new Promise(
             (resolve, reject) => {
-                
+                const headers = new Headers();
+                headers.append("Content-Type", "application/json");
+
+                const requestInit = {
+                    method: 'GET',
+                    headers: headers
+                };
+
+                fetch(this.urlResource, requestInit)
+                    .then(
+                        (response) => {
+                            if (response.ok) {
+                                response.json()
+                                        .then(
+                                            (value) => {
+                                                resolve(value);
+                                            },
+                                            (error) => {
+                                                reject(error);
+                                            }
+                                        );
+                            } else {
+                                reject(response.statusText);
+                            }
+                        },
+                        (error) => {
+                            reject(error);
+                        }
+                    );
             });
     }
   

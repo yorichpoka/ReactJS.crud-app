@@ -37,7 +37,7 @@ class App extends Component {
 
     return (
       <BrowserRouter>
-        <header className="bg-white pt-2 pb-5">
+        <header className="bg-white pt-2 pb-3">
           <HeaderComponent 
             userConnected={ user } 
             onSignout={ this.onSignInOrOut.bind(this) }

@@ -18,7 +18,7 @@ function HeaderComponent({ userConnected, onProfil, onSignout }) {
             }
             <Navbar bg="light" expand="lg" className="rounded border shadow" hidden={ userConnected == null || userConnected.username === '' }>
                 <Navbar.Brand>
-                    <Image src="images/bootstrap-solid.svg" width="30" height="30" className="d-inline-block align-top" alt=""></Image> Crud App
+                    <Image src="images/logo192.png" width="30" height="30" className="d-inline-block align-top" alt=""></Image> Ainos Crud App
                 </Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
